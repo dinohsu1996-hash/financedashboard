@@ -3,7 +3,7 @@
 
 Open PowerShell and run:
 
-cd C:\Users\User\Desktop\FinanceDashboard
+cd "C:\Users\User\Documents\GitHub\financedashboard"
 python -m venv .venv
 .\.venv\Scripts\activate
 pip install streamlit streamlit-option-menu pandas yfinance plotly sqlalchemy pymysql
@@ -48,12 +48,12 @@ dolt clone post-no-preference/earnings
 This will create a folder called earnings inside your current directory.
 
 ✅ Step 4: Start Dolt SQL Server
-cd earnings
+cd C:\Users\User\Documents\GitHub\financedashboard\earnings
 dolt sql-server --port 3307
 
 ✅ Step 5: Launch the Streamlit App
 cd ..
-cd FinanceDashboard
+cd "C:\Users\User\Documents\GitHub\financedashboard"
 .venv\Scripts\activate
 streamlit run finance_dashboard.py
 

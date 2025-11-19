@@ -1,11 +1,12 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
+import os
 
 # -----------------------------------------------
 # 🎯 Load ticker list from file
 def load_ticker_list(filepath="all_tickers.txt"):
     try:
-        with open(filepath, "r") as f:
+        with open(filepath, "r", encoding="utf-8") as f:
             tickers = [line.strip() for line in f if line.strip()]
         return tickers
     except FileNotFoundError:
@@ -16,7 +17,7 @@ ticker_list = load_ticker_list()
 # -----------------------------------------------
 
 # 🛠 Page config
-st.set_page_config(layout="wide", page_title="Finance Dashboard")
+st.set_page_config(layout="wide", page_title="Finance Dashboard", initial_sidebar_state="collapsed")
 
 # 🔒 Hide sidebar
 hide_sidebar_style = """
@@ -43,19 +44,28 @@ selected = option_menu(
     default_index=0
 )
 
+# 🔁 Helper to load page scripts safely
+def run_script(path):
+    full_path = os.path.join("pages", path)
+    if os.path.exists(full_path):
+        with open(full_path, encoding="utf-8") as f:
+            code = f.read()
+        exec(code, globals())  # Ensures shared variable scope across scripts
+    else:
+        st.error(f"Missing file: {full_path}")
+
 # 🧩 Page logic
 if selected == "Dashboard":
     st.markdown("Welcome to the Dashboard Overview!")
 
 elif selected == "Personal Finance":
-    exec(open("pages/1_Personal_Finance.py").read())
+    run_script("1_Personal_Finance.py")
 
 elif selected == "Single Stock":
-    # 💡 Pass ticker_list via globals if needed in child script
-    exec(open("pages/2_Single_Stock.py").read())
+    run_script("single_stock/main.py")
 
 elif selected == "Comparison":
-    exec(open("pages/3_Comparison_Mode.py").read())
+    run_script("3_Comparison_Mode.py")
 
 elif selected == "Analysis":
-    exec(open("pages/4_Analysis_Mode.py").read())
+    run_script("4_Analysis_Mode.py")
