@@ -137,13 +137,37 @@ def format_num(n):
 
 def safe(info, key): return info.get(key, "—")
 
-def render_card(label, value, color):
+def render_card(label, value, color, icon_name=None):
+    """
+    Render a small overview card with an optional Phosphor icon.
+
+    icon_name examples:
+      "factory", "buildings", "globe", "currency-dollar",
+      "chart-line-up", "scales", "trend-up", "chart-bar", "book-open"
+    """
+    # Build icon <img> tag if requested
+    icon_html = ""
+    if icon_name:
+        icon_html = f"""
+        <div class="card-icon-wrapper">
+            <img class="card-icon"
+                 src="https://phosphoricons.com/assets/icons/{icon_name}.svg"
+                 alt="{icon_name} icon" />
+        </div>
+        """
+
     return f"""
-    <div class="metric-card" style="background-color:{color};">
-        <div class="metric-label">{label}</div>
-        <div class="metric-value">{value}</div>
+    <div class="neon-card" style="border-color:{color};">
+        <div class="card-content">
+            {icon_html}
+            <div class="card-text-group">
+                <div class="card-label">{label}</div>
+                <div class="card-value">{value}</div>
+            </div>
+        </div>
     </div>
     """
+
 
 def format_ratio(val):
     if val is None or val == "—":

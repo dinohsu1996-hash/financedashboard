@@ -20,45 +20,17 @@ from pages.single_stock.utils import (
 st.title("📈 Company Overview")
 
 # -----------------------------
-# Global Styling
+# Global CSS (ONLY layout spacing — NO ICON/CARD CSS)
 # -----------------------------
-st.markdown(
-    """
+st.markdown("""
 <style>
-/* Metric cards (your existing style) */
-.metric-card {
-    border-radius:10px;
-    padding:15px;
-    margin-bottom:12px;
-    color:white;
-    text-align: center;
-}
-.metric-label {
-    font-size:13px;
-    opacity:0.85;
-}
-.metric-value {
-    font-size:19px;
-    font-weight:600;
+
+div[data-testid="column"] {
+    padding: 0.5rem;
 }
 
-/* ✅ ONLY affect Streamlit segmented controls (globally) */
-div[data-testid="stSegmentedControl"] button[aria-pressed="true"],
-div[data-testid="stSegmentedControl"] button[aria-checked="true"] {
-    background-color: #4CAF50 !important;  /* green */
-    color: #ffffff !important;
-    border-color: #4CAF50 !important;
-}
-
-/* Optional: make unselected segments neutral */
-div[data-testid="stSegmentedControl"] button {
-    color: inherit;
-    border-radius: 999px !important;  /* keeps pill shape */
-}
 </style>
-""",
-    unsafe_allow_html=True,
-)
+""", unsafe_allow_html=True)
 
 # -----------------------------
 # Ticker Input
@@ -116,7 +88,6 @@ if ticker:
             liabilities_df = get_dolthub_balance_sheet_liabilities(ticker)
             equity_df = get_dolthub_balance_sheet_equity(ticker)
 
-            # If all BS tables are empty, fall back to Yahoo
             if assets_df.empty and liabilities_df.empty and equity_df.empty:
                 st.warning("📭 No DoltHub financials found. Falling back to Yahoo Finance.")
                 using_dolthub = False
@@ -127,7 +98,7 @@ if ticker:
         # -------- Unified Fundamentals Rendering --------
         display_fundamentals(
             statement_tab=statement_tab,
-            statement_period=statement_period,   # <- Annual / Quarterly toggle
+            statement_period=statement_period,
             dolt_df=dolt_df if using_dolthub else None,
             assets_df=assets_df if using_dolthub else None,
             liabilities_df=liabilities_df if using_dolthub else None,
