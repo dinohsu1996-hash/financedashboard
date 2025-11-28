@@ -3,4 +3,8 @@ earnings/
 .env.*
 *.env
 .streamlit/secrets.toml
-src/__pycache__/*
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
