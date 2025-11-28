@@ -6,7 +6,7 @@ Open PowerShell and run:
 cd "C:\Users\User\Documents\GitHub\financedashboard"
 python -m venv .venv
 .\.venv\Scripts\activate
-pip install streamlit streamlit-option-menu pandas yfinance plotly sqlalchemy pymysql
+pip install -r requirements.txt
 
 ✅ Step 2: Install Dolt on Windows
 
