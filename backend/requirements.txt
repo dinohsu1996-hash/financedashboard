@@ -7,3 +7,5 @@ fredapi
 pandas
 plotly
 yfinance
+sqlalchemy
+pymysql
