@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+python-dotenv
+google-genai
+playwright
+fredapi
+pandas
+plotly
+yfinance
