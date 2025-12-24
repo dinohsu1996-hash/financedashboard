@@ -59,7 +59,7 @@ streamlit run finance_dashboard.py
 
 ## 🍎 macOS Setup
 ✅ Step 1: Create and Activate a Virtual Environment
-cd ~/Desktop/FinanceDashboard
+cd /Users/dinohsu/Documents/GitHub/financedashboard
 python3 -m venv .venv
 source .venv/bin/activate
 pip install streamlit streamlit-option-menu pandas yfinance plotly sqlalchemy pymysql
@@ -71,17 +71,19 @@ brew install dolt
 dolt clone post-no-preference/earnings
 
 ✅ Step 4: Start Dolt SQL Server
-cd ~/Desktop/FinanceDashboard/earnings
+cd /Users/dinohsu/Documents/GitHub/financedashboard/earnings
 dolt sql-server --port 3307
 
 ✅ Step 5: Launch the Streamlit App
-cd ~/Desktop/FinanceDashboard
+cd /Users/dinohsu/Documents/GitHub/financedashboard
 source .venv/bin/activate
 streamlit run finance_dashboard.py
 
 💡 Tips
-
-dolt pull — update the database with latest changes
+Updating Dolthub database
+Navigate to your database directory
+cd /Users/dinohsu/Documents/GitHub/financedashboard/earnings
+dolt pull origin master
 
 cd .. — move up one directory
 

@@ -573,6 +573,9 @@ def display_fundamentals(
         merged["Debt Ratio"] = merged["total_liabilities"] / merged["total_assets"]
         merged["Equity Ratio"] = merged["total_equity"] / merged["total_assets"]
         merged["Interest Coverage"] = merged["pretax_income"] / merged["interest_expense"]
+        merged["Current Ratio"] = merged["total_current_assets"] / merged["total_current_liabilities"]
+        merged["Cash Ratio"] = merged["cash_and_equivalents"] / merged["total_current_liabilities"]
+
 
         if "current_liabilities" in merged.columns:
             merged["Operating Cash Flow Ratio"] = (
@@ -588,6 +591,8 @@ def display_fundamentals(
             "Gross Margin",
             "ROA",
             "ROE",
+            "Cash Ratio",
+            "Current Ratio",
             "Debt to Equity",
             "Debt Ratio",
             "Equity Ratio",
@@ -598,8 +603,8 @@ def display_fundamentals(
         ratio_df = merged[ratio_cols].drop_duplicates("Period").set_index("Period").T
 
         # ---- Formatting ----
-        percent_rows = ["Net Profit Margin", "Gross Margin", "ROA", "ROE", "Debt Ratio", "Equity Ratio"]
-        float_rows = ["Debt to Equity", "Interest Coverage", "Operating Cash Flow Ratio"]
+        percent_rows = ["Net Profit Margin", "Gross Margin", "ROA", "ROE", "Debt Ratio", "Equity Ratio", "Debt to Equity"]
+        float_rows = ["Current Ratio", "Cash Ratio", "Interest Coverage", "Operating Cash Flow Ratio"]
 
         def try_format(val, as_percent=False):
             try:
